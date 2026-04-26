@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalkTutor – AI-Based Speech Improvement for Children & Teens in Sri Lanka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B3E;
+    --teal: #0E9AA7;
+    --teal-light: #3ECFDD;
+    --teal-dark: #097a85;
+    --white: #FFFFFF;
+    --off-white: #F4F8FB;
+    --gray: #6B7A99;
+    --light-gray: #E8EEF6;
+    --card-bg: #fff;
+    --shadow: 0 8px 40px rgba(13,27,62,0.10);
+    --radius: 18px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid var(--light-gray);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,62,0.10); }
+
+  .nav-logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800; font-size: 1.35rem;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+  }
+  .nav-logo span {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 6px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: background .2s, color .2s;
+  }
+  .nav-links a:hover { background: var(--light-gray); color: var(--teal); }
+
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a::after { content: ' ▾'; font-size: 0.7rem; }
+  .dropdown-menu {
+    display: none;
+    position: absolute; top: 110%; left: 0;
+    background: #fff;
+    border: 1.5px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 200px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+  }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: block;
+    font-size: 0.85rem; padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--navy);
+  }
+  .dropdown-menu a:hover { background: var(--light-gray); }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(150deg, var(--navy) 0%, #183466 55%, #0d4a5e 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+  }
+  .hero-blob-1 { width: 500px; height: 500px; background: var(--teal); top: -100px; right: -100px; }
+  .hero-blob-2 { width: 350px; height: 350px; background: #3ECFDD; bottom: -80px; left: 40%; }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(14,154,167,0.18);
+    border: 1px solid rgba(14,154,167,0.35);
+    color: var(--teal-light);
+    font-size: 0.8rem; font-weight: 600;
+    padding: 6px 16px; border-radius: 999px;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--teal-light);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 36px;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-meta {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.25s ease both;
+    margin-bottom: 36px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .val {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.7rem; font-weight: 800;
+    color: var(--teal-light);
+  }
+  .hero-stat .lbl {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.55);
+    display: block; margin-top: 2px;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background .2s, transform .15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 500; font-size: 0.95rem;
+    text-decoration: none;
+    transition: background .2s, border-color .2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+
+  /* ── SECTION BASE ── */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .section-desc {
+    font-size: 1rem;
+    color: var(--gray);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  /* ── SCOPE TABS ── */
+  #project-scope { background: #fff; }
+  .scope-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .scope-tab {
+    padding: 8px 20px;
+    border-radius: 99px;
+    font-size: 0.85rem; font-weight: 600;
+    background: var(--light-gray);
+    color: var(--navy);
+    border: none; cursor: pointer;
+    transition: all .2s;
+  }
+  .scope-tab.active, .scope-tab:hover {
+    background: var(--teal);
+    color: #fff;
+  }
+
+  .scope-panel { display: none; }
+  .scope-panel.active { display: block; animation: fadeUp .35s ease; }
+
+  .scope-card {
+    background: var(--off-white);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    border: 1.5px solid var(--light-gray);
+  }
+  .scope-card h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 16px;
+  }
+  .scope-card p { color: var(--gray); line-height: 1.8; margin-bottom: 14px; }
+  .scope-card ul { padding-left: 20px; color: var(--gray); line-height: 1.9; }
+  .scope-card li { margin-bottom: 6px; }
+  .scope-card strong { color: var(--navy); }
+
+  /* gap boxes */
+  .gap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
+  .gap-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px;
+    border-left: 4px solid var(--teal);
+    box-shadow: var(--shadow);
+  }
+  .gap-card h4 { font-family: 'Sora',sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+  .gap-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+  /* objectives grid */
+  .obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 20px; }
+  .obj-card {
+    background: var(--off-white);
+    border-radius: 14px;
+    padding: 28px;
+    border: 1.5px solid var(--light-gray);
+    position: relative;
+  }
+  .obj-num {
+    font-family: 'Sora',sans-serif;
+    font-size: 2.5rem; font-weight: 800;
+    color: var(--light-gray);
+    position: absolute; top: 16px; right: 20px;
+  }
+  .obj-card h4 { font-family: 'Sora',sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--teal); }
+  .obj-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── COMPONENTS ── */
+  #components { background: var(--navy); }
+  #components .section-title { color: #fff; }
+  #components .section-desc { color: rgba(255,255,255,0.6); }
+  #components .section-label { color: var(--teal-light); }
+
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+  .comp-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: transform .2s, background .2s;
+  }
+  .comp-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.08); }
+  .comp-icon {
+    width: 50px; height: 50px;
+    background: linear-gradient(135deg, var(--teal), #0a6e78);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  .comp-card h3 { font-family: 'Sora',sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .comp-card p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 16px; }
+  .comp-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 0.72rem; font-weight: 600;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(14,154,167,0.2);
+    color: var(--teal-light);
+    border: 1px solid rgba(14,154,167,0.3);
+  }
+
+  /* ── TECH STACK ── */
+  #tech { background: #fff; }
+  .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 16px; }
+  .tech-card {
+    background: var(--off-white);
+    border: 1.5px solid var(--light-gray);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: border-color .2s, transform .15s;
+  }
+  .tech-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .tech-card .tech-icon { font-size: 2rem; margin-bottom: 10px; }
+  .tech-card p { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+
+  /* ── MILESTONES ── */
+  #milestones { background: var(--off-white); }
+  .timeline { position: relative; max-width: 800px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 20px; top: 0; bottom: 0;
+    width: 2px; background: var(--light-gray);
+  }
+  .milestone {
+    display: flex; gap: 28px;
+    padding: 0 0 36px 60px;
+    position: relative;
+  }
+  .milestone-dot {
+    position: absolute; left: 10px; top: 4px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--light-gray);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1;
+  }
+  .milestone.done .milestone-dot { border-color: var(--teal); background: var(--teal); }
+  .milestone.done .milestone-dot::after { content: '✓'; font-size: 0.65rem; color: #fff; font-weight: 700; }
+  .milestone-date {
+    font-size: 0.75rem; font-weight: 600;
+    color: var(--teal);
+    min-width: 80px;
+    padding-top: 2px;
+  }
+  .milestone-content {}
+  .milestone-content h4 { font-family: 'Sora',sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .milestone-content p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
+  .milestone-badge {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 3px 12px; border-radius: 999px;
+    background: var(--light-gray); color: var(--navy);
+  }
+  .milestone.done .milestone-badge { background: rgba(14,154,167,0.15); color: var(--teal-dark); }
+
+  /* ── DOWNLOADS ── */
+  #downloads { background: #fff; }
+  .dl-tabs { display: flex; gap: 10px; margin-bottom: 36px; }
+  .dl-tab {
+    padding: 8px 24px; border-radius: 99px;
+    font-size: 0.88rem; font-weight: 600;
+    background: var(--light-gray); color: var(--navy);
+    border: none; cursor: pointer; transition: all .2s;
+  }
+  .dl-tab.active { background: var(--navy); color: #fff; }
+
+  .dl-panel { display: none; }
+  .dl-panel.active { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 18px; animation: fadeUp .3s ease; }
+
+  .dl-card {
+    background: var(--off-white);
+    border: 1.5px solid var(--light-gray);
+    border-radius: 14px;
+    padding: 24px;
+    transition: border-color .2s;
+  }
+  .dl-card:hover { border-color: var(--teal); }
+  .dl-card-type {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--teal); margin-bottom: 10px;
+  }
+  .dl-card h4 { font-family: 'Sora',sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .dl-card p { font-size: 0.82rem; color: var(--gray); margin-bottom: 16px; }
+  .dl-meta { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+  .dl-badge {
+    font-size: 0.72rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px;
+    background: rgba(14,154,167,0.12); color: var(--teal-dark);
+  }
+  .dl-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--navy); color: #fff;
+    font-size: 0.8rem; font-weight: 600;
+    padding: 7px 16px; border-radius: 8px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .dl-link:hover { background: var(--teal); }
+
+  /* ── TEAM ── */
+  #about { background: var(--off-white); }
+  .team-section-title { font-family: 'Sora',sans-serif; font-size: 1rem; font-weight: 700; color: var(--gray); margin: 36px 0 20px; letter-spacing: 1px; text-transform: uppercase; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 20px; }
+  .team-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 28px 20px 20px;
+    text-align: center;
+    border: 1.5px solid var(--light-gray);
+    transition: box-shadow .2s, transform .2s;
+  }
+  .team-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .team-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    background: linear-gradient(135deg, var(--teal), var(--navy));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora',sans-serif;
+    font-size: 1.6rem; font-weight: 800;
+    color: #fff;
+    overflow: hidden;
+  }
+  .team-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .team-card h4 { font-family: 'Sora',sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .team-card .role { font-size: 0.78rem; color: var(--teal); font-weight: 600; margin-bottom: 4px; }
+  .team-card .id { font-size: 0.75rem; color: var(--gray); }
+  .team-card.supervisor .team-avatar { background: linear-gradient(135deg, #183466, var(--teal)); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--navy); }
+  #contact .section-title { color: #fff; }
+  #contact .section-desc { color: rgba(255,255,255,0.6); }
+  #contact .section-label { color: var(--teal-light); }
+
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media(max-width:700px){ .contact-wrap { grid-template-columns: 1fr; } }
+
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width:500px){ .form-row { grid-template-columns: 1fr; } }
+  .contact-form input, .contact-form textarea {
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #fff;
+    font-family: 'DM Sans',sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--teal); }
+  .contact-form textarea { height: 130px; resize: vertical; }
+
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-info-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .contact-info-card h4 { font-family: 'Sora',sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 14px; }
+  .contact-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .contact-row .icon { font-size: 1.2rem; }
+  .contact-row span { font-size: 0.88rem; color: rgba(255,255,255,0.7); }
+  .contact-row a { font-size: 0.88rem; color: var(--teal-light); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #06101f;
+    padding: 40px 5%;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-left {}
+  .footer-logo {
+    font-family: 'Sora',sans-serif;
+    font-size: 1.2rem; font-weight: 800;
+    color: #fff; margin-bottom: 6px;
+  }
+  .footer-sub { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  .footer-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-nav a { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-nav a:hover { color: var(--teal-light); }
+  .footer-right { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px) {
+    .nav-links { display: none; }
+    .hero-meta { gap: 20px; }
+    .scope-tabs { gap: 6px; }
+    section { padding: 60px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <span>TT</span> TalkTutor
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li class="nav-dropdown">
+      <a href="#project-scope">Scope</a>
+      <div class="dropdown-menu">
+        <a href="#project-scope">Literature Survey</a>
+        <a href="#research-gap">Research Gap</a>
+        <a href="#research-problem">Research Problem & Solution</a>
+        <a href="#research-objectives">Research Objectives</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#tech">Technologies</a>
+      </div>
+    </li>
+    <li><a href="#milestones">Milestones</a></li>
+    <li class="nav-dropdown">
+      <a href="#downloads">Downloads</a>
+      <div class="dropdown-menu">
+        <a href="#downloads">Documents</a>
+        <a href="#presentations">Presentations</a>
+      </div>
+    </li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🎓 SLIIT Faculty of Computing &nbsp;·&nbsp; 25-26J-327</div>
+    <h1 class="hero-title">
+      AI-Based <em>Speech Improvement</em><br>for Children & Teens<br>in Sri Lanka
+    </h1>
+    <p class="hero-sub">
+      An intelligent, gamified speech therapy platform powered by deep learning — making
+      pronunciation coaching accessible, affordable, and effective for every child.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-stat"><div class="val">4</div><span class="lbl">Core Components</span></div>
+      <div class="hero-stat"><div class="val">1M+</div><span class="lbl">Target Children</span></div>
+      <div class="hero-stat"><div class="val">95%+</div><span class="lbl">Model Accuracy</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#project-scope" class="btn-primary">Explore Research</a>
+      <a href="#downloads" class="btn-outline">View Downloads</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT SCOPE -->
+<section id="project-scope">
+  <div class="reveal">
+    <div class="section-label">Project Scope</div>
+    <h2 class="section-title">Research Domain</h2>
+    <p class="section-desc">
+      This section captures the literature survey, research gap, research problem & solution,
+      research objectives, and the methodology used throughout the project.
+    </p>
+  </div>
+  <div class="scope-tabs reveal">
+    <button class="scope-tab active" onclick="showScope('lit-survey',this)">Literature Survey</button>
+    <button class="scope-tab" onclick="showScope('research-gap',this)">Research Gap</button>
+    <button class="scope-tab" onclick="showScope('research-problem',this)">Research Problem & Solution</button>
+    <button class="scope-tab" onclick="showScope('research-objectives',this)">Research Objectives</button>
+    <button class="scope-tab" onclick="showScope('methodology',this)">Methodology</button>
+  </div>
+
+  <!-- Literature Survey -->
+  <div id="lit-survey" class="scope-panel active reveal">
+    <div class="scope-card">
+      <h3>Literature Survey</h3>
+      <p>Speech and pronunciation difficulties are common among children and teenagers and can significantly affect their confidence and communication skills. In Sri Lanka, many families cannot easily access speech therapy due to high costs and limited availability of specialists.</p>
+      <p>This issue mainly affects children with speech difficulties, their parents, and schools that lack proper speech support resources. Research into AI-powered speech analysis has seen rapid growth globally, yet low-resource language environments like Sinhala remain underserved.</p>
+      <p>Recent advances in deep learning — particularly Convolutional Neural Networks (CNNs), Siamese networks, and transformer-based architectures — have shown promising results in speech recognition and pronunciation scoring tasks. However, most existing solutions target English or other high-resource languages, leaving a critical gap for Sri Lankan children.</p>
+      <ul>
+        <li>Existing tools lack support for Sinhala phonemes and local accents.</li>
+        <li>Gamified speech therapy apps have shown higher engagement in pediatric populations.</li>
+        <li>Audio quality enhancement preprocessing significantly improves downstream model accuracy.</li>
+        <li>Siamese networks for pronunciation comparison outperform rule-based scoring in child speech contexts.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Research Gap -->
+  <div id="research-gap" class="scope-panel reveal">
+    <div class="gap-grid">
+      <div class="gap-card">
+        <h4>🌍 Low-Resource Language Support</h4>
+        <p>No comprehensive AI speech improvement system exists for Sinhala or Tamil-speaking children in Sri Lanka. Existing tools are predominantly English-centric.</p>
+      </div>
+      <div class="gap-card">
+        <h4>🎙️ Audio Quality in Real-World Settings</h4>
+        <p>Most research assumes clean audio input. There is limited work on noise-robust speech analysis for child speech captured via low-cost mobile devices in home or classroom settings.</p>
+      </div>
+      <div class="gap-card">
+        <h4>📊 Pronunciation Scoring for Children</h4>
+        <p>Pronunciation scoring models trained on adult speech do not generalize well to child voice characteristics such as higher pitch, varying tempo, and shorter phoneme durations.</p>
+      </div>
+      <div class="gap-card">
+        <h4>👨‍👩‍👧 Parent & Therapist Integration</h4>
+        <p>Existing apps rarely provide structured dashboards for parents and speech therapists to track progress, communicate, and receive personalized AI recommendations.</p>
+      </div>
+      <div class="gap-card">
+        <h4>🎮 Gamification & Engagement</h4>
+        <p>There is insufficient research on the long-term engagement effects of gamified speech therapy specifically for Sri Lankan children aged 5–17.</p>
+      </div>
+      <div class="gap-card">
+        <h4>🤖 Personalized Adaptive Learning</h4>
+        <p>No current system in the Sri Lankan context uses reinforcement-learning-based adaptive curricula that automatically adjust difficulty based on individual child progress.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Research Problem & Solution -->
+  <div id="research-problem" class="scope-panel reveal">
+    <div class="scope-card">
+      <h3>Research Problem</h3>
+      <p><strong>How can an AI-based system accurately analyze and improve the speech and pronunciation of children and teenagers in Sri Lanka, overcoming barriers of cost, accessibility, and language resource scarcity?</strong></p>
+      <p>Over 1 million children in Sri Lanka are estimated to have some form of speech difficulty. Access to qualified speech-language pathologists is extremely limited outside major cities, and private therapy is financially out of reach for most families. Schools lack structured speech support programs, and no affordable digital alternative exists for local languages.</p>
+
+      <h3 style="margin-top:28px;">Proposed Solution — TalkTutor</h3>
+      <p>TalkTutor is a mobile and web-based AI speech improvement platform specifically designed for children and teenagers in Sri Lanka. It combines four AI-powered components:</p>
+      <ul>
+        <li><strong>Audio Quality Enhancement</strong> — Cleans and enhances recorded speech using signal processing and ML classifiers before analysis.</li>
+        <li><strong>Pronunciation Accuracy Scoring</strong> — Uses a Siamese network trained on child–parent audio pairs to score pronunciation quality and provide feedback.</li>
+        <li><strong>Word Classification & Speech Delay Analysis</strong> — Identifies individual word recognition issues and detects speech delay patterns using CNN-based classifiers.</li>
+        <li><strong>Personalized Recommendations & Parent Dashboard</strong> — A Decision Tree policy model predicts optimal learning actions and delivers recommendations to parents and therapists in real time.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Research Objectives -->
+  <div id="research-objectives" class="scope-panel reveal">
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-num">01</div>
+        <h4>Audio Quality Analysis</h4>
+        <p>Design and implement an audio quality enhancement pipeline that classifies and improves raw child speech recordings captured via mobile devices before downstream analysis.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">02</div>
+        <h4>Pronunciation Accuracy Scoring</h4>
+        <p>Build a Siamese network-based pronunciation scoring model trained on child–parent speech pairs to provide phoneme-level accuracy scores and real-time feedback.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">03</div>
+        <h4>Word Classification & Speech Delay</h4>
+        <p>Develop a word-level speech classifier to identify mispronounced or delayed words using stratified training on Sinhala word datasets with acoustic feature extraction.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-num">04</div>
+        <h4>Adaptive Recommendations</h4>
+        <p>Create a Decision Tree-based policy model that predicts optimal learning actions for each child and provides actionable dashboards for parents and therapists.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Methodology -->
+  <div id="methodology" class="scope-panel reveal">
+    <div class="scope-card">
+      <h3>System Methodology</h3>
+      <p>The proposed TalkTutor system follows an end-to-end machine learning pipeline organized into four major components, each developed independently and integrated via a unified mobile/web backend.</p>
+
+      <p><strong>Component 01 – Audio Quality &amp; Improvement Analysis (Toussaint I M R)</strong><br>
+      Raw speech audio is captured through the mobile app. The pipeline preprocesses audio by extracting acoustic quality features, then trains and evaluates multiple classifiers (Random Forest, SVM, XGBoost) using train/val/test splits with cross-validation. The best model (selected by F1 score) classifies audio quality, and enhancement is applied accordingly.</p>
+
+      <p><strong>Component 02 – Pronunciation Accuracy &amp; Scoring (Chankana D G L)</strong><br>
+      A Siamese neural network is trained on child–parent speech pairs with ground-truth human pronunciation scores. The model learns phonetic similarity through contrastive learning, supporting hard cross-word negatives and identity samples. Optional audio augmentations improve robustness. Output includes a confidence-calibrated score ("Excellent", "Good", "Needs Practice") per word.</p>
+
+      <p><strong>Component 03 – Word Classification &amp; Speech Delay Analysis (Ekanayaka M E G D P)</strong><br>
+      A dataset of Sinhala word audio clips is processed via feature extraction (MFCCs, spectrograms). An 80/20 stratified split generates train/test CSVs. Multiple classifiers are trained with repeated cross-validation; the best model is evaluated on the test set and saved with a full performance report. A Mystery Match game UI provides real-time word-matching practice.</p>
+
+      <p><strong>Component 04 – Recommendations &amp; Parent Communication (Nadeeshan I A D D)</strong><br>
+      Student practice sessions are simulated to create a labelled dataset for a Decision Tree policy model (policy_model.pkl). The model predicts the optimal next learning action per student. A parent/therapist dashboard visualises progress and enables chat-based communication. Account creation and role-based access control are implemented for parents, children, and therapists.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM COMPONENTS -->
+<section id="components">
+  <div class="reveal">
+    <div class="section-label">Core Research Components</div>
+    <h2 class="section-title" style="color:#fff;">System Architecture & Components</h2>
+    <p class="section-desc">The system delivers AI-powered speech improvement through four specialized components, each addressing a distinct aspect of child speech analysis.</p>
+  </div>
+  <div class="comp-grid reveal">
+    <div class="comp-card">
+      <div class="comp-icon">🎙️</div>
+      <h3>Audio Quality & Improvement Analysis</h3>
+      <p>Classifies and enhances raw audio captured via mobile devices using acoustic feature extraction and ensemble ML classifiers. Trained with cross-validation and evaluated by F1 score.</p>
+      <div class="comp-tags">
+        <span class="tag">Random Forest</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">Audio DSP</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">📊</div>
+      <h3>Pronunciation Accuracy & Scoring</h3>
+      <p>Siamese neural network trained on child–parent speech pairs. Provides confidence-calibrated pronunciation scores and feedback labels ("Excellent", "Good") per spoken word.</p>
+      <div class="comp-tags">
+        <span class="tag">Siamese Network</span>
+        <span class="tag">Contrastive Learning</span>
+        <span class="tag">Audio Augmentation</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">🧩</div>
+      <h3>Word Classification & Speech Delay</h3>
+      <p>CNN-based classifier on Sinhala word audio clips using MFCC and spectrogram features. A gamified "Mystery Match" interface provides real-time practice and instant result feedback.</p>
+      <div class="comp-tags">
+        <span class="tag">CNN</span>
+        <span class="tag">MFCC</span>
+        <span class="tag">Gamification</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-icon">👨‍👩‍👧</div>
+      <h3>Recommendations & Parent Dashboard</h3>
+      <p>Decision Tree policy model predicts optimal learning actions per student. Role-based dashboards for parents and therapists support progress tracking and real-time chat.</p>
+      <div class="comp-tags">
+        <span class="tag">Decision Tree</span>
+        <span class="tag">Reinforcement Learning</span>
+        <span class="tag">Chat System</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="reveal">
+    <div class="section-label">Technologies</div>
+    <h2 class="section-title">Technology Stack</h2>
+    <p class="section-desc">Built on a modern, production-grade stack combining deep learning frameworks, cross-platform mobile development, and cloud-native deployment.</p>
+  </div>
+  <div class="tech-grid reveal">
+    <div class="tech-card"><div class="tech-icon">🐍</div><p>Python</p></div>
+    <div class="tech-card"><div class="tech-icon">🔥</div><p>TensorFlow</p></div>
+    <div class="tech-card"><div class="tech-icon">⚡</div><p>PyTorch</p></div>
+    <div class="tech-card"><div class="tech-icon">📐</div><p>Scikit-Learn</p></div>
+    <div class="tech-card"><div class="tech-icon">📱</div><p>React Native</p></div>
+    <div class="tech-card"><div class="tech-icon">🌐</div><p>React</p></div>
+    <div class="tech-card"><div class="tech-icon">🗄️</div><p>MongoDB</p></div>
+    <div class="tech-card"><div class="tech-icon">☁️</div><p>AWS</p></div>
+    <div class="tech-card"><div class="tech-icon">🔊</div><p>Librosa</p></div>
+    <div class="tech-card"><div class="tech-icon">🔗</div><p>Flask</p></div>
+    <div class="tech-card"><div class="tech-icon">🔑</div><p>JWT Auth</p></div>
+    <div class="tech-card"><div class="tech-icon">🧪</div><p>Google Colab</p></div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section id="milestones">
+  <div class="reveal">
+    <div class="section-label">Milestones</div>
+    <h2 class="section-title">Project Timeline</h2>
+    <p class="section-desc">Key research and academic deliverables throughout the 2025–2026 project year.</p>
+  </div>
+  <div class="timeline reveal">
+    <div class="milestone done">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Feb 2025</div>
+      <div class="milestone-content">
+        <h4>Topic Assessment</h4>
+        <p>Initial topic evaluation and project scope definition submitted for departmental review.</p>
+        <span class="milestone-badge">Done · 6%</span>
+      </div>
+    </div>
+    <div class="milestone done">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Mar 2025</div>
+      <div class="milestone-content">
+        <h4>Project Proposal</h4>
+        <p>Full project proposal submitted outlining research aims, methodology, and preliminary literature review.</p>
+        <span class="milestone-badge">Done · 6%</span>
+      </div>
+    </div>
+    <div class="milestone done">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">May 2025</div>
+      <div class="milestone-content">
+        <h4>Progress Presentation I</h4>
+        <p>50% completion review — initial model prototypes, dataset preparation, and architecture presented to panel.</p>
+        <span class="milestone-badge">Done · 6%</span>
+      </div>
+    </div>
+    <div class="milestone done">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Jul 2025</div>
+      <div class="milestone-content">
+        <h4>Research Paper</h4>
+        <p>Individual research contributions documented and submitted for academic publication review.</p>
+        <span class="milestone-badge">Done · 10%</span>
+      </div>
+    </div>
+    <div class="milestone done">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Oct 2025</div>
+      <div class="milestone-content">
+        <h4>Progress Presentation II</h4>
+        <p>90% completion demonstration with full system integration, UI walkthroughs, and model evaluation results.</p>
+        <span class="milestone-badge">Done · 18%</span>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Nov 2025</div>
+      <div class="milestone-content">
+        <h4>Website Assessment</h4>
+        <p>Research project website published and reviewed for public research promotion.</p>
+        <span class="milestone-badge">Upcoming · 2%</span>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Nov 2025</div>
+      <div class="milestone-content">
+        <h4>Final Report</h4>
+        <p>Comprehensive group and individual final reports submitted with full system documentation.</p>
+        <span class="milestone-badge">Upcoming · 19%</span>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-dot"></div>
+      <div class="milestone-date">Dec 2025</div>
+      <div class="milestone-content">
+        <h4>Final Presentation & Viva</h4>
+        <p>Individual viva assessments evaluating each member's personal research contribution.</p>
+        <span class="milestone-badge">Upcoming · 20%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section id="downloads">
+  <div class="reveal">
+    <div class="section-label">Downloads</div>
+    <h2 class="section-title">Documents & Presentations</h2>
+    <p class="section-desc">Access all research documents, reports, and presentations related to this project below.</p>
+  </div>
+  <div class="dl-tabs reveal">
+    <button class="dl-tab active" onclick="showDl('docs',this)">Documents</button>
+    <button class="dl-tab" onclick="showDl('pres',this)" id="presentations">Presentations</button>
+  </div>
+
+  <div id="docs" class="dl-panel active reveal">
+    <div class="dl-card">
+      <div class="dl-card-type">Document</div>
+      <h4>Project Charter</h4>
+      <p>Project scope, objectives, and stakeholder agreement document.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Document</div>
+      <h4>Proposal Document</h4>
+      <p>Full research proposal with literature review and methodology outline.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Document</div>
+      <h4>Checklist Documents</h4>
+      <p>Progress checklists and component-level completion tracking.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Individual</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Document</div>
+      <h4>Status Document I</h4>
+      <p>Mid-project status report with component progress and issues log.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Individual</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Document</div>
+      <h4>Research Paper</h4>
+      <p>Academic research paper documenting findings and contributions.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Document</div>
+      <h4>Final Report</h4>
+      <p>Comprehensive final project report — group and individual components.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group + Individual</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="pres" class="dl-panel reveal">
+    <div class="dl-card">
+      <div class="dl-card-type">Presentation</div>
+      <h4>Project Proposal</h4>
+      <p>Initial project presentation submitted in March 2025.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Presentation</div>
+      <h4>Progress Presentation I</h4>
+      <p>50% milestone deck covering initial models and architecture.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Presentation</div>
+      <h4>Progress Presentation II</h4>
+      <p>90% milestone deck with full system demo and evaluation results.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+    <div class="dl-card">
+      <div class="dl-card-type">Presentation</div>
+      <h4>Final Presentation</h4>
+      <p>Complete final presentation — link will be updated post-submission.</p>
+      <div class="dl-meta">
+        <span class="dl-badge">Group</span>
+        <a href="#" class="dl-link">↓ Download</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / TEAM -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">Meet Our Team</h2>
+    <p class="section-desc">Faculty of Computing, SLIIT — IT4010 Final Year Research Project 2025–2026</p>
+  </div>
+
+  <p class="team-section-title reveal">Supervisors</p>
+  <div class="team-grid reveal">
+    <div class="team-card supervisor">
+      <div class="team-avatar">BA</div>
+      <h4>Ms. Buddhima Attanayake</h4>
+      <div class="role">Supervisor</div>
+      <div class="id">SLIIT Faculty of Computing</div>
+    </div>
+    <div class="team-card supervisor">
+      <div class="team-avatar">SR</div>
+      <h4>Mr. Samadhi Rathnayake</h4>
+      <div class="role">Co-Supervisor</div>
+      <div class="id">SLIIT Faculty of Computing</div>
+    </div>
+  </div>
+
+  <p class="team-section-title reveal">Research Team</p>
+  <div class="team-grid reveal">
+    <div class="team-card">
+      <div class="team-avatar">TI</div>
+      <h4>Toussaint I M R</h4>
+      <div class="role">Component 01 Lead</div>
+      <div class="id">IT22335746</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">EE</div>
+      <h4>Ekanayaka M E G D P</h4>
+      <div class="role">Component 03 Lead</div>
+      <div class="id">IT22316622</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">CD</div>
+      <h4>Chankana D G L</h4>
+      <div class="role">Component 02 Lead</div>
+      <div class="id">IT22915986</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">NI</div>
+      <h4>Nadeeshan I A D D</h4>
+      <div class="role">Component 04 Lead</div>
+      <div class="id">IT22906526</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Contact Us</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-desc">Reach out for research inquiries, collaborations, or access to TalkTutor resources.</p>
+  </div>
+  <div class="contact-wrap reveal">
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Email Address">
+      </div>
+      <input type="text" placeholder="Subject">
+      <textarea placeholder="Your message or inquiry…"></textarea>
+      <button type="submit" class="btn-primary" style="width:fit-content;">Send Message →</button>
+    </form>
+    <div class="contact-info">
+      <div class="contact-info-card">
+        <h4>Project Contact</h4>
+        <div class="contact-row">
+          <span class="icon">📧</span>
+          <a href="mailto:spekraft.contact@gmail.com">spekraft.contact@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="icon">🌐</span>
+          <a href="http://www.spekraft.com" target="_blank">www.spekraft.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="icon">📍</span>
+          <span>SLIIT Faculty of Computing, Malabe, Sri Lanka</span>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <h4>Institutional Context</h4>
+        <div class="contact-row">
+          <span class="icon">🎓</span>
+          <span>BSc (Hons) Information Technology — IT4010 Final Year Research</span>
+        </div>
+        <div class="contact-row">
+          <span class="icon">🔬</span>
+          <span>Research Area: AI · Speech Processing · Child Education</span>
+        </div>
+        <div class="contact-row">
+          <span class="icon">🤝</span>
+          <span>Open to academic collaboration and research partnerships</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo">TalkTutor</div>
+    <div class="footer-sub">AI-Based Speech Improvement · SLIIT · 25-26J-327</div>
+  </div>
+  <nav class="footer-nav">
+    <a href="#home">Home</a>
+    <a href="#project-scope">Scope</a>
+    <a href="#milestones">Milestones</a>
+    <a href="#downloads">Downloads</a>
+    <a href="#about">Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="footer-right">© 2025 TalkTutor Research Project</div>
+</footer>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scope tabs
+  function showScope(id, btn) {
+    document.querySelectorAll('.scope-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.scope-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Download tabs
+  function showDl(id, btn) {
+    document.querySelectorAll('.dl-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.dl-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
